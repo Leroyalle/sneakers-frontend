@@ -1,0 +1,28 @@
+.cart-item {
+  min-width: 325px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 30px 20px;
+  &__image {
+    margin-right: 21px;
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+  }
+  &__title {
+    font-size: 14px;
+    line-height: 16.94px;
+    font-weight: 400;
+  }
+  &__price {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16.94px;
+  }
+  &__delete-button {
+    align-self: end;
+  }
+}

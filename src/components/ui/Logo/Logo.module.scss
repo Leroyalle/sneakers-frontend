@@ -1,0 +1,18 @@
+.logo {
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+  //   max-width: 245px;
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24.2px;
+    font-family: 'Inter', sans-serif;
+  }
+  &__text {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.94px;
+  }
+}

@@ -1,0 +1,15 @@
+.header {
+  background-color: #ffffff;
+  border-bottom: 1px solid gray;
+  padding-block: 43px 44px;
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1080px;
+    min-width: 320px;
+    width: 100%;
+    margin: auto;
+    padding-inline: 45px;
+  }
+}

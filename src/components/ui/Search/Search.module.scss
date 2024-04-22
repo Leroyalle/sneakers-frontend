@@ -1,0 +1,28 @@
+.search {
+  width: 250px;
+  height: 45px;
+  border-radius: 10px;
+  border: 1px solid #f3f3f3;
+  padding-block: 14px;
+  padding-left: 46px;
+  padding-right: 30px;
+  font-size: 14px;
+  line-height: 16.94px;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  &__wrapper {
+    position: relative;
+  }
+  &__button-clear {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+  }
+  &__image-clear {
+    width: 30px;
+    height: 30px;
+  }
+}

@@ -1,0 +1,43 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: #333333;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clippath: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
