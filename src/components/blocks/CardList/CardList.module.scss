@@ -1,6 +1,36 @@
 .product-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 210px);
+  justify-content: center;
+  width: 100%;
+  max-width: 1080px;
+  row-gap: 40px;
+  column-gap: 40px;
   margin: auto;
+  @media (min-width: 320px) and (max-width: 768px) {
+    column-gap: 20px;
+    row-gap: 30px;
+  }
+  @media (min-width: 768px) and (max-width: 1080px) {
+    column-gap: 25px;
+    row-gap: 30px;
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, 240px);
+  }
+  @media (max-width: 540px) {
+    grid-template-columns: repeat(auto-fit, 280px);
+  }
+  &__item {
+    transition: transform 150ms ease-in-out;
+    &:hover {
+      transform: translate(-5px, -2px);
+    }
+  }
+}
+.jcs {
+  justify-content: start;
+}
+.jcc {
+  justify-content: center;
 }

@@ -1,0 +1,31 @@
+.favorites-empty {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &__image {
+    margin-bottom: 29px;
+    width: 70px;
+    height: 70px;
+  }
+  &__title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29.05px;
+    text-align: center;
+    margin-bottom: 11px;
+  }
+  &__text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.36px;
+    text-align: center;
+    color: #000000;
+    opacity: 40%;
+    margin-bottom: 70px;
+  }
+}

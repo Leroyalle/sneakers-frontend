@@ -2,8 +2,20 @@
   background-color: #ffffff;
   border-bottom: 1px solid gray;
   padding-block: 43px 44px;
+  width: 100%;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  @media (min-width: 320px) and (max-width: 768px) {
+    padding-block: 15px;
+  }
+  @media (min-width: 768px) and (max-width: 1080px) {
+    padding-block: 25px;
+  }
   &__wrapper {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     max-width: 1080px;
@@ -11,5 +23,15 @@
     width: 100%;
     margin: auto;
     padding-inline: 45px;
+    // @media (max-width: 585px) {
+    //   flex-direction: column;
+    //   justify-content: center;
+    // }
+    @media (min-width: 320px) and (max-width: 768px) {
+      padding-inline: 10px;
+    }
+    @media (min-width: 768px) and (max-width: 1080px) {
+      padding-inline: 20px;
+    }
   }
 }

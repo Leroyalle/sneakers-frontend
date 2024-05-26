@@ -1,11 +1,46 @@
+import React from 'react';
 import Styles from './Drawer.module.scss';
+import { useState } from 'react';
+import axios from 'axios';
+import { endpoints } from '../../../api/config';
 import { CartItem } from '../../ui/CartItem';
-export const Drawer = ({ closeDrawer, cartItems }) => {
+import { Total } from '../../blocks/Total';
+import { CartEmpty } from '../../blocks/CartEmpty';
+import { AppContext } from '../../../context/AppContext';
+export const Drawer = ({
+  closeDrawer,
+  cartItems,
+  setCartItems,
+  orderId,
+  setOrderId,
+  drawerIsOpened,
+}) => {
+  const { setOrders } = React.useContext(AppContext);
+  const [isOrderComplete, setIsOrderComplete] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const stopPropagation = (event) => {
     event.stopPropagation();
   };
+  const onClickOrder = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.post(endpoints.orders, { items: cartItems });
+      setOrders((prev) => [...prev, ...data.items]);
+      setOrderId(data.id);
+      cartItems.forEach(async (item) => {
+        await axios.delete(`${endpoints.cart}/${item.id}`);
+      });
+      setIsOrderComplete(true);
+      setCartItems([]);
+    } catch (error) {
+      console.error('Ошибка при оформлении заказа:', error);
+    }
+    setIsLoading(false);
+  };
   return (
-    <div className={Styles.overlay} onClick={closeDrawer}>
+    <div
+      className={`${Styles.overlay} ${drawerIsOpened && Styles.overlay__visible}`}
+      onClick={closeDrawer}>
       <div className={Styles.drawer} onClick={stopPropagation}>
         <div className={Styles['drawer__head']}>
           <h2 className={Styles['drawer__title']}>Корзина</h2>
@@ -13,30 +48,34 @@ export const Drawer = ({ closeDrawer, cartItems }) => {
             <img src="/img/actions/delete.svg" alt="" width={32} height={32} />
           </button>
         </div>
-        <div className={Styles['drawer__items']}>
-          {cartItems.map((item) => {
-            return (
-              <div key={item.id}>
-                <CartItem item={item} />
-              </div>
-            );
-          })}
-        </div>
-        <div className={Styles['drawer__bottom']}>
-          <div className={Styles['drawer__total']}>
-            <div className={Styles['drawer__total-inner']}>
-              <span className={Styles['drawer__total-text']}>Итого:</span>
-              <div className={Styles['drawer__total-line']}></div>
-              <span className={Styles['drawer__total-value']}>21 498 руб.</span>
+        {cartItems.length ? (
+          <>
+            <div className={Styles['drawer__items']}>
+              {cartItems.map((item) => {
+                return (
+                  <div key={item.id}>
+                    <CartItem item={item} cartItems={cartItems} setCartItems={setCartItems} />
+                  </div>
+                );
+              })}
             </div>
-            <div className={Styles['drawer__total-inner']}>
-              <span className={Styles['drawer__total-text']}>Налог:</span>
-              <div className={Styles['drawer__total-line']}></div>
-              <span className={Styles['drawer__total-value']}>1074 руб.</span>
+            <div className={Styles['drawer__bottom']}>
+              <Total cartItems={cartItems} />
+              <button
+                className={Styles['drawer__button']}
+                onClick={onClickOrder}
+                disabled={isLoading}>
+                Оформить заказ
+              </button>
             </div>
-          </div>
-          <button className={Styles['drawer__button']}>Оформить заказ</button>
-        </div>
+          </>
+        ) : (
+          <CartEmpty
+            closeDrawer={closeDrawer}
+            isOrderComplete={isOrderComplete}
+            orderId={orderId}
+          />
+        )}
       </div>
     </div>
   );
